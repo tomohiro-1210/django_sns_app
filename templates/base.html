@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {% block customcss %}
+    {% endblock customcss %}
+
+    <title>Document</title>
+</head>
+<body>
+    <header class=" bg-blue-300">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+              <span class="text-xl">Hoshitetsu SNS</span>
+            </a>
+            <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+              {% block header %}
+              {% endblock header %}
+            </nav>
+          </div>
+    </header>
+    
+    <div class="w-100">
+        <div class="w-100 md:w-3/4 mx-auto">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+
+    
+</body>
+</html>

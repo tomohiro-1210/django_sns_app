@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock customcss %}
+
+{% block header %}
+<a href="{% url 'list' %}" class="mr-5 hover:text-gray-900">投稿一覧</a>
+<a href="{% url 'logout' %}" class="mr-5 hover:text-gray-900">ログアウト</a>
+<a href="{% url 'create' %}" class="hover:text-gray-900">新規投稿</a>
+{% endblock header %}
+
+{% block content %}
+            <section class="text-gray-600 body-font">
+                <h3 class="text-black-500 mt-8 mb-4 md:mb-6 text-center text-5xl">投稿一覧</h3>                      
+                <div class="text-center pb-6">
+                  <a href="{% url 'create' %}" class="inline-block mx-auto mt-6 text-white bg-indigo-500 border-0 py-2 md:py-3 px-5 md:px-8 focus:outline-none rounded mr-2 text-xl">新規投稿</a>
+                </div>
+                <div class="container px-5 mx-auto">
+                  <div class="flex flex-wrap -mx-4 -mb-10 text-center">
+                    {% for object in object_list %}
+                    <!-- 投稿 -->
+                    <div class="border-1 border-gray-500 w-full md:w-1/3 mb-10 px-4">
+                      <div class="rounded-lg">
+                        <img alt="content" class="object-cover object-center h-full w-full" src="{{ object.sns_image.url }}">
+                      </div>
+                      <h2 class="title-font text-xl md:text-2xl font-medium text-gray-900 text-left mt-6">{{ object.title }} <span class="text-sm md:text-base">@{{ object.author }}</span></h2>
+                      <div class="text-left">
+                        <a class="inline-block mx-auto mt-6 text-white bg-red-500 border-0 py-2 px-5 focus:outline-none rounded mr-2">いいね : {{object.good}}</a>
+                        <a class="inline-block mx-auto mt-6 text-white bg-green-500 border-0 py-2 px-5 focus:outline-none rounded mr-2">既読</a>
+                        <a href="{% url 'detail' object.pk %}" class="inline-block mx-auto mt-6 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded">詳細を見る</a>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </section>
+{% endblock content %}

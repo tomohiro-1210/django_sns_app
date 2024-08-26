@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock customcss %}
+
+
+{% block header %}
+<a href="{% url 'list' %}" class="mr-5 hover:text-gray-900">投稿一覧</a>
+<a href="{% url 'logout' %}" class="mr-5 hover:text-gray-900">ログアウト</a>
+<a href="{% url 'create' %}" class="hover:text-gray-900">新規投稿</a>
+{% endblock header %}
+
+{% block content %}
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-6 md:py-8 mx-auto flex flex-col">
+    <div class="lg:w-4/6 mx-auto">
+      <!-- タイトル -->
+      <h3 class="text-black-500 mb-8 md:mb-12 text-center text-5xl">{{ object.title }}</h3>
+      <!-- サムネイル画像 -->
+      <div class="rounded-lg">
+        <img alt="content" class="object-cover object-center h-full w-full" src="{{ object.sns_image.url }}">
+      </div>
+      <!-- ユーザーデータ -->
+      <div class="block sm:flex mt-6">
+        <div class="sm:w-1/3 text-center text-xl md:text-base sm:pr-0 sm:py-0">
+          <!-- ユーザーデータ -->
+          <div class="items-center text-center justify-center">
+            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">{{ object.author }}</h2>
+          </div>
+        </div>
+        <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+          <p class="leading-relaxed text-lg mb-4">{{ object.content }}</p>
+          <div class="text-left">
+            <a href="{% url 'good' object.pk %}" class="inline-block mx-auto mt-6 text-white bg-red-500 border-0 py-1 md:py-2 px-3 md:px-5 focus:outline-none hover:bg-red-600 rounded mr-2">いいね</a>
+            <a href="{% url 'read' object.pk %}" class="inline-block mx-auto mt-6 text-white bg-green-500 border-0 py-1 md:py-2 px-3 md:px-5 focus:outline-none hover:bg-green-600 rounded mr-2">既読</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
